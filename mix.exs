@@ -65,6 +65,7 @@ defmodule ExzeitableWeb.MixProject do
       {:credo, "~> 1.5", only: :test, runtime: false},
       {:dialyxir, "~> 1.1", only: :test, runtime: false},
       {:excoveralls, "~> 0.18.1", only: :test, runtime: false},
+      {:exzeitable, "~> 0.6"},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.1.1",
