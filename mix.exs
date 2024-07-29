@@ -8,6 +8,24 @@ defmodule ExzeitableWeb.MixProject do
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        dialyzer: :test,
+        credo: :test,
+        check: :test,
+        format: :test,
+        "coveralls.html": :test,
+        "coveralls.json": :test,
+        "coveralls.lcov": :test
+      ],
+      dialyzer: [
+        plt_add_apps: [:ex_unit, :mix],
+        list_unused_filters: true,
+        plt_local_path: "dialyzer",
+        plt_core_path: "dialyzer",
+        ignore_warnings: ".dialyzer-ignore.exs",
+        flags: [:unmatched_returns, :no_improper_lists, :extra_return, :missing_return]
+      ],
       aliases: aliases(),
       deps: deps()
     ]
@@ -38,12 +56,15 @@ defmodule ExzeitableWeb.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:ex_check, "~>0.12", only: :test, runtime: false},
+      {:credo, "~> 1.5", only: :test, runtime: false},
+      {:dialyxir, "~> 1.1", only: :test, runtime: false},
+      {:excoveralls, "~> 0.18.1", only: :test, runtime: false},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.1.1",
