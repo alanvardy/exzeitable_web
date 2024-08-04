@@ -10,14 +10,10 @@ defmodule ExzeitableWebWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", ExzeitableWebWeb do
     pipe_through :browser
 
     get "/", PageController, :home
-    get "/users", PageController, :users
+    resources("/users", UserController)
   end
 end
